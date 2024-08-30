@@ -1,0 +1,52 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: team-red
+  description: This is a description of my service component.
+  tags:
+    - service
+    - backend
+    - example
+spec:
+  type: service
+  lifecycle: production
+  owner: team-red
+  system: team-red-hackathon
+  providesApis:
+    - team-red-service-api
+  consumesApis:
+    - twitter-apis
+  dependsOn:
+    - resource:team-red-database
+    - resource:team-red-kafka
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: team-red-hackathon
+  tags:
+    - red
+spec:
+  owner: red-team  
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: team-red-database
+  description: "Team Red Database"
+spec:
+  type: database
+  owner: red-team
+  lifecycle: production
+  system: team-red-hackathon
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: team-red-kafka
+  description: "Team Red Kafka"
+spec:
+  type: kafka
+  owner: team-red
+  lifecycle: production
+  system: team-red-hackathon
